@@ -1,0 +1,4 @@
+PRIMARY_COLOR = "#0e407f"  # rgb -> bgr
+SUCCESS_COLOR = "#127265"
+DANGER_COLOR = "#871717"
+TEXT_WHITE_COLOR = "#fdfdfe"
