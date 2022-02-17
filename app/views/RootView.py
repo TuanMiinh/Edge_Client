@@ -211,6 +211,7 @@ class RootView(tk.Tk):
 
         if self.RecognizeState == RecognizeState.RECOGNIZED_SUCESSED:
             self.finish_view.tkraise()
+            self.after(2000, lambda: self.change_state(RecognizeState.INIT))
 
         if self.RecognizeState == RecognizeState.RECONIZED_FAILED:
             self.face_not_me_view.tkraise()
