@@ -75,6 +75,7 @@ class RatingView(tk.Frame):
         self.form_frame_bg_img = self.form_frame_bg_img.resize(
             (int(w)+10, h))
         self.form_frame_bg_imgtk = ImageTk.PhotoImage(self.form_frame_bg_img)
+        self.btn = tk.Button(self.form_frame_bg_img,text="confirm").place(relx = 0.5, rely=0.5)
         self.form_frame_bg = tk.Label(
             self.form_frame, image=self.form_frame_bg_imgtk, bg='white', bd=0)
         self.form_frame_bg.place(relx=0, rely=0, anchor='nw')
@@ -90,6 +91,7 @@ class RatingView(tk.Frame):
         self.rating_frame.place(
             relx=0.5, rely=0.62, anchor='center', relheight=0.142, relwidth=0.63)
         self.stars = []
+
         x = 1
         for i in range(5):
             self.stars.append(tk.Button(self.rating_frame, image=self.unstar_imgtk,
@@ -103,15 +105,13 @@ class RatingView(tk.Frame):
 
 
 
-
-
-
     def rating(self, x):
         self.stars[1].config(image=self.star_imgtk)
         for btn in self.stars:
             btn.config(image=self.unstar_imgtk)
         for i in range(x+1):
             self.stars[i].config(image=self.star_imgtk)
+
 
     def size_change(self, event):
         self.cur_appsize = (event.width, event.height)

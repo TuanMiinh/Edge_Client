@@ -60,10 +60,14 @@ class RootView(tk.Tk):
         self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 600)
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
+        print("Start cam 1")
         #
         self.cap2 = cv2.VideoCapture(1, cv2.CAP_DSHOW)
         self.cap2.set(cv2.CAP_PROP_FRAME_WIDTH,1500)
         self.cap2.set(cv2.CAP_PROP_FRAME_HEIGHT,800)
+        print("Start cam 2")
+
+
 
     def init_state(self):
         self.process_type = ProcessType.FACEFOOD
@@ -193,14 +197,14 @@ class RootView(tk.Tk):
             self.RatingState = RatingState.NOT_FINISH
             self.recognize_view.tkraise()
             self.recognize_view.draw()
+        if self.RecognizeState ==  RecognizeState.RATING:
+            self.rating_view.tkraise()
+            self.rating_view.draw()
 
         if self.RecognizeState == RecognizeState.RECOGNIZED:
-            if self.RatingState == RatingState.FINISH:
-                self.result_view.tkraise()
-                self.result_view.draw()
-            else:
-                self.rating_view.tkraise()
-                self.rating_view.draw()
+            self.result_view.tkraise()
+            self.result_view.draw()
+
         if self.RecognizeState == RecognizeState.UN_RECOGNIZED:
             self.face_failed_view.tkraise()
             self.face_failed_view.draw()
@@ -232,10 +236,6 @@ class RootView(tk.Tk):
 
     def frame_web_cap_meal(self):
 
-        self.cap2 = cv2.VideoCapture(1)
-        self.cap2.set(cv2.CAP_PROP_FRAME_WIDTH,1500)
-        self.cap2.set(cv2.CAP_PROP_FRAME_HEIGHT,800)
-
         _, frame2 = self.cap2.read()
         frame2 = cv2.flip(frame2, 1)
         cv2image2 = cv2.cvtColor(frame2, cv2.COLOR_BGR2RGBA)
@@ -264,7 +264,8 @@ class RootView(tk.Tk):
             relx=0.1, rely=0)
         tk.Button(self, text="Again", command=lambda: self.change_state(RecognizeState.INIT)).place(
             relx=0.2, rely=0)
-
+        tk.Button(self, text="Rating", command=lambda: self.change_state(RecognizeState.RATING)).place(
+            relx=0.3, rely=0)
 
 if __name__ == '__main__':
     root = RootView()

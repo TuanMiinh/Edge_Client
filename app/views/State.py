@@ -14,6 +14,7 @@ class RecognizeState(enum.Enum):
     RECOGNIZED_SUCESSED = 4
     RECONIZED_FAILED = 5
     RETRY = 6
+    RATING = 7
 
 
 class RatingState(enum.Enum):
